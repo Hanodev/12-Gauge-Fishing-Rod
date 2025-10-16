@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5ntiq4fl5gtf"]
+
+[ext_resource type="Script" uid="uid://duobfjlbpxx0s" path="res://menu/settings/keybinds.gd" id="1_cnfln"]
+
+[node name="Keybinds" type="MarginContainer"]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -129.0
+offset_right = 129.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.999536, 1)
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+script = ExtResource("1_cnfln")
+
+[node name="MarginContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="ActionList" type="VBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 25
+
+[node name="Reset" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_hover_color = Color(0.909, 1, 0.22, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.648, 0.04, 1)
+text = "Reset Configuration"
+flat = true
+alignment = 0
+
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/Reset" to="." method="_on_reset_pressed"]

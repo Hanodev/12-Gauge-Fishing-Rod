@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbbqshwtfh0je"]
+
+[ext_resource type="Script" uid="uid://lhyjlartjjuu" path="res://menu/pause/pause.gd" id="1_1inkp"]
+[ext_resource type="PackedScene" uid="uid://b5ntiq4fl5gtf" path="res://menu/settings/keybinds.tscn" id="1_rkexb"]
+
+[node name="Pause" type="MarginContainer"]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1inkp")
+
+[node name="Keybinds" parent="." instance=ExtResource("1_rkexb")]
+layout_mode = 2
+size_flags_horizontal = 4
