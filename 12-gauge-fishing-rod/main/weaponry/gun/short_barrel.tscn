@@ -1,0 +1,121 @@
+[gd_scene load_steps=8 format=3 uid="uid://cvv5w7qvfkqsr"]
+
+[ext_resource type="Script" uid="uid://n2vkbvlufrcy" path="res://main/weaponry/essential/gun.gd" id="1_2ob26"]
+[ext_resource type="Script" uid="uid://cn5ac81pxi3am" path="res://asset/juice/shaker.gd" id="2_3bycu"]
+[ext_resource type="ArrayMesh" uid="uid://doun4bnrsfgcb" path="res://main/weaponry/gun/asset/Shotgun.obj" id="2_8qhk2"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3bycu"]
+
+[sub_resource type="Animation" id="Animation_3bycu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shaker/MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.41311347, -0.41280866, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shaker/MeshInstance3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shaker")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_8qhk2"]
+resource_name = "shoot"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shaker/MeshInstance3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.413, -0.413, -0.77), Vector3(0.413, -0.413, 0.355), Vector3(0.41311347, -0.41280866, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shaker/MeshInstance3D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.20071286, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shaker")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.8],
+"method": &"add_trauma"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3bycu"]
+_data = {
+&"RESET": SubResource("Animation_3bycu"),
+&"shoot": SubResource("Animation_8qhk2")
+}
+
+[node name="ShortBarrel" type="Node3D"]
+script = ExtResource("1_2ob26")
+metadata/_custom_type_script = "uid://chtdxnjbpm3m3"
+
+[node name="Shaker" type="Node3D" parent="."]
+script = ExtResource("2_3bycu")
+trauma_reduction_rate = 2.0
+noise = SubResource("FastNoiseLite_3bycu")
+noise_speed = 80.0
+max_x = 15.0
+max_y = 15.0
+max_z = 0.0
+traumua_target = 0.4
+metadata/_custom_type_script = "uid://cn5ac81pxi3am"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Shaker"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.41311347, -0.41280866, 0)
+mesh = ExtResource("2_8qhk2")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3bycu")
+}
+playback_default_blend_time = 0.05
+
+[connection signal="primary_activated" from="." to="AnimationPlayer" method="play" binds= [&"shoot"]]

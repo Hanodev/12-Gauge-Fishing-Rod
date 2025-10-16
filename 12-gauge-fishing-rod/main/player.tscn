@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cam4bh1ds81ys"]
+
+[ext_resource type="Script" uid="uid://th58mqtf3yv3" path="res://main/player.gd" id="1_ou4ca"]
+[ext_resource type="Script" uid="uid://doxjjxmpshdng" path="res://main/weaponry/essential/equipment_handler.gd" id="2_4v151"]
+[ext_resource type="PackedScene" uid="uid://cvv5w7qvfkqsr" path="res://main/weaponry/gun/short_barrel.tscn" id="3_lat6o"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oul6g"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_ou4ca")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_oul6g")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5801647, 0)
+
+[node name="CameraHolder" type="Node3D" parent="CameraPivot"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/CameraHolder"]
+unique_name_in_owner = true
+
+[node name="EquipmentHandler" type="Node3D" parent="CameraPivot/CameraHolder" node_paths=PackedStringArray("main_equipment")]
+script = ExtResource("2_4v151")
+main_equipment = NodePath("ShortBarrel")
+metadata/_custom_type_script = "uid://doxjjxmpshdng"
+
+[node name="ShortBarrel" parent="CameraPivot/CameraHolder/EquipmentHandler" instance=ExtResource("3_lat6o")]
