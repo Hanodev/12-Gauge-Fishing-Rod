@@ -1,10 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://cam4bh1ds81ys"]
+[gd_scene load_steps=12 format=3 uid="uid://cam4bh1ds81ys"]
 
 [ext_resource type="Script" uid="uid://th58mqtf3yv3" path="res://main/player.gd" id="1_ou4ca"]
 [ext_resource type="Script" uid="uid://doxjjxmpshdng" path="res://main/weaponry/essential/equipment_handler.gd" id="2_4v151"]
+[ext_resource type="Script" uid="uid://cn5ac81pxi3am" path="res://asset/juice/shaker.gd" id="2_lat6o"]
+[ext_resource type="Script" uid="uid://bmxbe0suv76bg" path="res://main/camera.gd" id="3_5ar6u"]
 [ext_resource type="PackedScene" uid="uid://cvv5w7qvfkqsr" path="res://main/weaponry/gun/short_barrel.tscn" id="3_lat6o"]
+[ext_resource type="Shader" uid="uid://cfhm3rsqlbmlq" path="res://asset/shader/canvas/anime_lines.gdshader" id="5_pi8k8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oul6g"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lat6o"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pi8k8"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5ar6u"]
+noise = SubResource("FastNoiseLite_pi8k8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ar6u"]
+shader = ExtResource("5_pi8k8")
+shader_parameter/noise = SubResource("NoiseTexture2D_5ar6u")
+shader_parameter/line_count = 2.0
+shader_parameter/distortion_power = 0.034
+shader_parameter/line_falloff = 0.386000018335
+shader_parameter/mask_size = 0.175
+shader_parameter/mask_edge = 0.195
+shader_parameter/animation_speed = 20.0
+shader_parameter/blur_strength = 0.01
+shader_parameter/effect_power = 1.0
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_ou4ca")
@@ -13,12 +35,18 @@ script = ExtResource("1_ou4ca")
 shape = SubResource("CapsuleShape3D_oul6g")
 
 [node name="CameraPivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5801647, 0)
+script = ExtResource("2_lat6o")
+camera_shake = true
+noise = SubResource("FastNoiseLite_lat6o")
+noise_speed = 80.0
+max_x = 15.0
+metadata/_custom_type_script = "uid://cn5ac81pxi3am"
 
 [node name="CameraHolder" type="Node3D" parent="CameraPivot"]
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/CameraHolder"]
 unique_name_in_owner = true
+script = ExtResource("3_5ar6u")
 
 [node name="EquipmentHandler" type="Node3D" parent="CameraPivot/CameraHolder" node_paths=PackedStringArray("main_equipment")]
 script = ExtResource("2_4v151")
@@ -26,3 +54,14 @@ main_equipment = NodePath("ShortBarrel")
 metadata/_custom_type_script = "uid://doxjjxmpshdng"
 
 [node name="ShortBarrel" parent="CameraPivot/CameraHolder/EquipmentHandler" instance=ExtResource("3_lat6o")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_5ar6u")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

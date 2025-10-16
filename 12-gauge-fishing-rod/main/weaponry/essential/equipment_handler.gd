@@ -6,8 +6,6 @@ extends Node3D
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed(&"Primary"):
 		_activate_equipment(0,true)
-	if Input.is_action_just_released(&"Primary"):
-		_activate_equipment(0,false)
 
 func _activate_equipment(type: int = Equipment.ACTION.PRIMARY, activated:= false) -> void:
 	if not main_equipment: return

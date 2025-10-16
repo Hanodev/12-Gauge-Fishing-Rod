@@ -2,10 +2,12 @@ extends Node3D
 class_name Shaker
 
 @export var trauma_reduction_rate = 1.0
-@export var use_shake_strength:= false
+@export var camera_shake:= false
 @export var noise: FastNoiseLite = FastNoiseLite.new()
 @export var noise_speed = 10.0
+
 var trauma = 0.0
+
 @export_group("Maximum Values")
 @export var max_x = 45.0
 @export var max_y = 25.0
@@ -24,6 +26,9 @@ func _ready() -> void:
 	x_seed = randi_range(1,128)
 	y_seed = randi_range(1,128)
 	z_seed = randi_range(1,128)
+	
+	if camera_shake:
+		Manager.camera_shaked.connect(add_trauma)
 
 func _physics_process(delta):
 	trauma = max(trauma - delta * trauma_reduction_rate,traumua_target)
@@ -43,3 +48,9 @@ func get_shake_intensity() -> float:
 func get_noise_from_seed(_seed : int) -> float:
 	noise.seed = _seed
 	return noise.get_noise_1d(time * noise_speed)
+
+func apply_camera_shake() -> void:
+	Manager.apply_camera_shake()
+
+func apply_fov_change() -> void:
+	Manager.camera_fov_changed.emit(90.0)

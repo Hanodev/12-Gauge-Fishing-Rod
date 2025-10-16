@@ -1,10 +1,67 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvv5w7qvfkqsr"]
+[gd_scene load_steps=22 format=3 uid="uid://cvv5w7qvfkqsr"]
 
 [ext_resource type="Script" uid="uid://n2vkbvlufrcy" path="res://main/weaponry/essential/gun.gd" id="1_2ob26"]
 [ext_resource type="Script" uid="uid://cn5ac81pxi3am" path="res://asset/juice/shaker.gd" id="2_3bycu"]
 [ext_resource type="ArrayMesh" uid="uid://doun4bnrsfgcb" path="res://main/weaponry/gun/asset/Shotgun.obj" id="2_8qhk2"]
+[ext_resource type="Shader" uid="uid://b5fa5uqmflay7" path="res://asset/shader/spatial/fire3d.gdshader" id="3_o4ts1"]
+[ext_resource type="AudioStream" uid="uid://def4qpstng24b" path="res://main/weaponry/gun/asset/ShotgunShot1.wav" id="4_l5cyb"]
+[ext_resource type="AudioStream" uid="uid://bfvrlqo840cr2" path="res://main/weaponry/gun/asset/ShotgunShot2.wav" id="5_o4ts1"]
+[ext_resource type="AudioStream" uid="uid://cxb56fi7nxuwv" path="res://main/weaponry/gun/asset/ShotgunShot3.wav" id="6_lxgt3"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3bycu"]
+frequency = 0.0601
+fractal_octaves = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lxgt3"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vu6ih"]
+noise = SubResource("FastNoiseLite_lxgt3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_73nwk"]
+render_priority = 0
+shader = ExtResource("3_o4ts1")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_vu6ih")
+shader_parameter/root_color = Color(1, 0.75, 0.3, 1)
+shader_parameter/tip_color = Color(1, 0.03, 0.001, 1)
+shader_parameter/fire_alpha = 1.0
+shader_parameter/fire_speed = Vector2(0, 1)
+shader_parameter/fire_aperture = 0.22
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_o4ts1"]
+top_radius = 0.12
+bottom_radius = 0.12
+height = 1.0
+radial_segments = 8
+rings = 0
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_o4ts1"]
+noise_type = 2
+frequency = 0.0125
+fractal_octaves = 10
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lxgt3"]
+noise = SubResource("FastNoiseLite_o4ts1")
+seamless = true
+in_3d_space = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vu6ih"]
+render_priority = 0
+shader = ExtResource("3_o4ts1")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_lxgt3")
+shader_parameter/root_color = Color(1, 1, 0, 1)
+shader_parameter/tip_color = Color(1, 0, 0, 1)
+shader_parameter/fire_alpha = 1.0
+shader_parameter/fire_speed = Vector2(0, 0.05)
+shader_parameter/fire_aperture = 3.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vu6ih"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_73nwk"]
+noise = SubResource("FastNoiseLite_vu6ih")
+seamless = true
+in_3d_space = true
 
 [sub_resource type="Animation" id="Animation_3bycu"]
 length = 0.001
@@ -43,10 +100,46 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(),
 "values": []
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Shaker/MeshInstance3D/MeshInstance3D:surface_material_override/0:shader_parameter/fire_aperture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Shaker/MeshInstance3D/SpotLight3D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Shaker/MeshInstance3D/SpotLight3D:spot_attenuation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.41]
+}
 
 [sub_resource type="Animation" id="Animation_8qhk2"]
 resource_name = "shoot"
-length = 0.2
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -54,10 +147,10 @@ tracks/0/path = NodePath("Shaker/MeshInstance3D:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.033333335, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.17602974, 0.2, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0.413, -0.413, -0.77), Vector3(0.413, -0.413, 0.355), Vector3(0.41311347, -0.41280866, 0)]
+"values": [Vector3(0.413, -0.413, -0.77), Vector3(0.413, -0.413, 1.415), Vector3(0.41311347, -0.41280866, 0), Vector3(0.413, -0.463, 0), Vector3(0.41311347, -0.41280866, 0), Vector3(0.413, -0.413, -0.77)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -66,10 +159,10 @@ tracks/1/path = NodePath("Shaker/MeshInstance3D:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.099999994, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.099999994, 0.13333334, 0.1875231, 0.21655892),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.20071286, 0, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0.07853982, 0.08726646, -0.061086524), Vector3(0, 0, 0), Vector3(-0.1308997, 0, 0), Vector3(0, 0, 0)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -78,12 +171,54 @@ tracks/2/path = NodePath("Shaker")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.033333335),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
+"args": [],
+"method": &"apply_fov_change"
+}, {
 "args": [0.8],
 "method": &"add_trauma"
+}, {
+"args": [],
+"method": &"apply_camera_shake"
 }]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Shaker/MeshInstance3D/MeshInstance3D:surface_material_override/0:shader_parameter/fire_aperture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.06666667, 0.16666667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 3.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Shaker/MeshInstance3D/SpotLight3D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.033333335, 0.26666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Shaker/MeshInstance3D/SpotLight3D:spot_attenuation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.033333335, 0.13333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-2.41, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3bycu"]
@@ -91,6 +226,12 @@ _data = {
 &"RESET": SubResource("Animation_3bycu"),
 &"shoot": SubResource("Animation_8qhk2")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vu6ih"]
+streams_count = 3
+stream_0/stream = ExtResource("4_l5cyb")
+stream_1/stream = ExtResource("5_o4ts1")
+stream_2/stream = ExtResource("6_lxgt3")
 
 [node name="ShortBarrel" type="Node3D"]
 script = ExtResource("1_2ob26")
@@ -100,7 +241,7 @@ metadata/_custom_type_script = "uid://chtdxnjbpm3m3"
 script = ExtResource("2_3bycu")
 trauma_reduction_rate = 2.0
 noise = SubResource("FastNoiseLite_3bycu")
-noise_speed = 80.0
+noise_speed = 15.0
 max_x = 15.0
 max_y = 15.0
 max_z = 0.0
@@ -109,13 +250,33 @@ metadata/_custom_type_script = "uid://cn5ac81pxi3am"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Shaker"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.41311347, -0.41280866, 0)
+material_overlay = SubResource("ShaderMaterial_73nwk")
 mesh = ExtResource("2_8qhk2")
 skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Shaker/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.37502897, -6.612996)
+mesh = SubResource("CylinderMesh_o4ts1")
+surface_material_override/0 = SubResource("ShaderMaterial_vu6ih")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Shaker/MeshInstance3D"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -0.041856766, 0.10152626, -3.3689284)
+visible = false
+light_color = Color(1, 1, 0, 1)
+light_projector = SubResource("NoiseTexture2D_73nwk")
+shadow_enabled = true
+spot_range = 23.67
+spot_attenuation = -2.41
+spot_angle_attenuation = 0.066985846
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_3bycu")
 }
-playback_default_blend_time = 0.05
 
+[node name="SFXFire" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_vu6ih")
+bus = &"Effects"
+
+[connection signal="primary_activated" from="." to="SFXFire" method="play"]
 [connection signal="primary_activated" from="." to="AnimationPlayer" method="play" binds= [&"shoot"]]
