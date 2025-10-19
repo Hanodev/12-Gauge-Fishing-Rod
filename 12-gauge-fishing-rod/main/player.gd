@@ -7,6 +7,7 @@ extends CharacterBody3D
 @export var jump_strength:= 20.0
 @export var gravity:= 22.0
 @export var speed:= 8.0
+@export var rod : Rod
 
 const mouse_sensitivity:= 0.1
 

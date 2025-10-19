@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://brxjbhm0sfeyf"]
+[gd_scene load_steps=8 format=3 uid="uid://brxjbhm0sfeyf"]
 
 [ext_resource type="PackedScene" uid="uid://cam4bh1ds81ys" path="res://main/player.tscn" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://cdpv4sefuxbx1" path="res://asset/sky.hdr" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bhup0oivyqiyl" path="res://main/fish/essential/fish.tscn" id="3_h2yge"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_h2yge"]
 panorama = ExtResource("2_0xm2m")
@@ -40,3 +41,6 @@ size = Vector3(25, 1, 25)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4908555, 0, -0.94745445)
 mesh = SubResource("BoxMesh_0xm2m")
+
+[node name="Fish" parent="." instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.328895, 1, 11.190088)

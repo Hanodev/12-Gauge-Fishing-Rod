@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhup0oivyqiyl"]
+
+[ext_resource type="Script" uid="uid://dyh1jymsggqbe" path="res://main/fish/essential/fish.gd" id="1_ewdx7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ewdx7"]
+
+[node name="Fish" type="CharacterBody3D"]
+script = ExtResource("1_ewdx7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ewdx7")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
