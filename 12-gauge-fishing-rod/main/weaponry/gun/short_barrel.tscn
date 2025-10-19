@@ -263,6 +263,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_vu6ih")
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -0.041856766, 0.10152626, -3.3689284)
 visible = false
 light_color = Color(1, 1, 0, 1)
+light_volumetric_fog_energy = 0.02
 light_projector = SubResource("NoiseTexture2D_73nwk")
 shadow_enabled = true
 spot_range = 23.67

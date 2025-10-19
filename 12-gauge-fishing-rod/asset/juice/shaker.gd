@@ -26,7 +26,7 @@ func _ready() -> void:
 	x_seed = randi_range(1,128)
 	y_seed = randi_range(1,128)
 	z_seed = randi_range(1,128)
-	
+
 	if camera_shake:
 		Manager.camera_shaked.connect(add_trauma)
 
