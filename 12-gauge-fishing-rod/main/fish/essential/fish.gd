@@ -25,12 +25,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if hooker:
 		target_position = -(hooker.rod.target.global_position - global_position).normalized()
-		
+
 	else:
 		return
-		
+
 	in_water = position.y<0
-		
+
 	if !is_on_floor() and in_water:
 		target_velocity += target_position * SPEED
 		velocity.x = move_toward(velocity.x,target_velocity.x, delta * 10)
@@ -39,38 +39,38 @@ func _physics_process(delta: float) -> void:
 			velocity.y = move_toward(velocity.y,-1, delta * 10)
 		else:
 			velocity.y = move_toward(velocity.y,1, delta * 10)
-		
+
 	elif !in_water:
 		velocity.x = move_toward(velocity.x,0, delta * 10)
-		
+
 		if is_on_floor():
 			velocity.y = move_toward(velocity.y,0, delta * 10)
 		else:
 			velocity.y = move_toward(velocity.y,-16, delta * 10)
-			
+
 		velocity.z = move_toward(velocity.z,0, delta * 10)
 
-		
-	
+
+
 	velocity.x = clamp(velocity.x, -50,50)
 	velocity.y = clamp(velocity.y, -50,50)
 	velocity.z = clamp(velocity.z, -50,50)
-	
+
 	move_and_slide()
-	
+
 func whipped():
 	if is_whipped:
 		return
-		
+
 	is_whipped = true
 	velocity.x = target_position.x * -20
 	velocity.y = 20
 	velocity.z = target_position.z * -20
 	await get_tree().create_timer(.5).timeout
 	is_whipped = false
-	
-func pulled(STRENGTH):
+
+func pulled(PULL_STRENGTH: float) -> void:
 	if is_whipped:
 		return
-	velocity.x = target_position.x * -STRENGTH
-	velocity.z = target_position.z * -STRENGTH
+	velocity.x = target_position.x * -PULL_STRENGTH
+	velocity.z = target_position.z * -PULL_STRENGTH

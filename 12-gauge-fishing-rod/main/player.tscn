@@ -1,10 +1,11 @@
-[gd_scene load_steps=32 format=3 uid="uid://cam4bh1ds81ys"]
+[gd_scene load_steps=33 format=3 uid="uid://cam4bh1ds81ys"]
 
 [ext_resource type="Script" uid="uid://th58mqtf3yv3" path="res://main/player.gd" id="1_ou4ca"]
 [ext_resource type="Script" uid="uid://doxjjxmpshdng" path="res://main/weaponry/essential/equipment_handler.gd" id="2_4v151"]
 [ext_resource type="Script" uid="uid://cn5ac81pxi3am" path="res://asset/juice/shaker.gd" id="2_lat6o"]
 [ext_resource type="Script" uid="uid://bmxbe0suv76bg" path="res://main/camera.gd" id="3_5ar6u"]
 [ext_resource type="PackedScene" uid="uid://cvv5w7qvfkqsr" path="res://main/weaponry/gun/short_barrel.tscn" id="3_lat6o"]
+[ext_resource type="Script" uid="uid://7om8331fswfc" path="res://main/functionality/interaction/interactor.gd" id="4_bsjl6"]
 [ext_resource type="Shader" uid="uid://cfhm3rsqlbmlq" path="res://asset/shader/canvas/anime_lines.gdshader" id="5_pi8k8"]
 [ext_resource type="Script" uid="uid://dw0hnq7yosqa7" path="res://main/weaponry/essential/rod.gd" id="6_1vr6g"]
 [ext_resource type="Shader" uid="uid://b5fa5uqmflay7" path="res://asset/shader/spatial/fire3d.gdshader" id="7_bsjl6"]
@@ -267,6 +268,7 @@ rod = NodePath("CameraPivot/CameraHolder/EquipmentHandler/TestRod")
 shape = SubResource("CapsuleShape3D_oul6g")
 
 [node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.599141, 0)
 script = ExtResource("2_lat6o")
 camera_shake = true
 noise = SubResource("FastNoiseLite_lat6o")
@@ -279,6 +281,14 @@ metadata/_custom_type_script = "uid://cn5ac81pxi3am"
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/CameraHolder"]
 unique_name_in_owner = true
 script = ExtResource("3_5ar6u")
+
+[node name="Interactor" type="RayCast3D" parent="CameraPivot/CameraHolder/Camera3D"]
+target_position = Vector3(0, 0, -7)
+collision_mask = 32
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("4_bsjl6")
+metadata/_custom_type_script = "uid://7om8331fswfc"
 
 [node name="EquipmentHandler" type="Node3D" parent="CameraPivot/CameraHolder" node_paths=PackedStringArray("main_equipment")]
 script = ExtResource("2_4v151")
