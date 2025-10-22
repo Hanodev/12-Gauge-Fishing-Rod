@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://w5bvehahm4fv"]
+
+[ext_resource type="Script" uid="uid://ptdjaxs6sn67" path="res://menu/ui/hud/player_hud.gd" id="1_5n6i4"]
+[ext_resource type="Texture2D" uid="uid://dejk2qsle0ltd" path="res://menu/ui/hud/fishing-pole.svg" id="1_8405h"]
+
+[node name="PlayerHud" type="CanvasLayer"]
+script = ExtResource("1_5n6i4")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="BoxContainer" type="BoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+vertical = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/BoxContainer"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_8405h")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="MarginContainer/BoxContainer"]
+layout_mode = 2
+text = "I LOVE BIG WOMEN"

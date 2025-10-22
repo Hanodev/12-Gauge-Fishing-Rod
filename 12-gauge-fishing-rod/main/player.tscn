@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cam4bh1ds81ys"]
+[gd_scene load_steps=34 format=3 uid="uid://cam4bh1ds81ys"]
 
 [ext_resource type="Script" uid="uid://th58mqtf3yv3" path="res://main/player.gd" id="1_ou4ca"]
 [ext_resource type="Script" uid="uid://doxjjxmpshdng" path="res://main/weaponry/essential/equipment_handler.gd" id="2_4v151"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://def4qpstng24b" path="res://main/weaponry/gun/asset/ShotgunShot1.wav" id="9_47fst"]
 [ext_resource type="AudioStream" uid="uid://bfvrlqo840cr2" path="res://main/weaponry/gun/asset/ShotgunShot2.wav" id="10_jsce1"]
 [ext_resource type="AudioStream" uid="uid://cxb56fi7nxuwv" path="res://main/weaponry/gun/asset/ShotgunShot3.wav" id="11_xhk5t"]
+[ext_resource type="PackedScene" uid="uid://w5bvehahm4fv" path="res://menu/ui/hud/player_hud.tscn" id="14_c6jii"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oul6g"]
 
@@ -355,6 +356,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PlayerHud" parent="." instance=ExtResource("14_c6jii")]
 
 [connection signal="primary_activated" from="CameraPivot/CameraHolder/EquipmentHandler/TestRod" to="CameraPivot/CameraHolder/EquipmentHandler/TestRod/SFXFire" method="play"]
 [connection signal="primary_activated" from="CameraPivot/CameraHolder/EquipmentHandler/TestRod" to="CameraPivot/CameraHolder/EquipmentHandler/TestRod/AnimationPlayer" method="play" binds= [&"shoot"]]
