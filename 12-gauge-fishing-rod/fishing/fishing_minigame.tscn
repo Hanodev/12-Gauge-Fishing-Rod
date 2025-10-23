@@ -1,0 +1,96 @@
+[gd_scene load_steps=8 format=3 uid="uid://boubf1v4tk34o"]
+
+[ext_resource type="Script" uid="uid://tbnea161xmog" path="res://fishing/fishing_minigame.gd" id="1_c2u82"]
+[ext_resource type="Texture2D" uid="uid://cthhhios41gl1" path="res://fishing/fish-png-19.png" id="2_neky2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c2u82"]
+size = Vector2(32, 100)
+
+[sub_resource type="Gradient" id="Gradient_neky2"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mhktn"]
+gradient = SubResource("Gradient_neky2")
+width = 32
+height = 32
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c2u82"]
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_neky2"]
+size = Vector2(20, 80)
+
+[node name="FishingMinigame" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+script = ExtResource("1_c2u82")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(512, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+value = 50.0
+show_percentage = false
+
+[node name="FishPoint" type="Area2D" parent="ProgressBar"]
+unique_name_in_owner = true
+position = Vector2(256, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProgressBar/FishPoint"]
+shape = SubResource("RectangleShape2D_c2u82")
+
+[node name="Sprite2D" type="Sprite2D" parent="ProgressBar/FishPoint"]
+texture = SubResource("GradientTexture2D_mhktn")
+
+[node name="PlayerReel" type="RigidBody2D" parent="ProgressBar"]
+unique_name_in_owner = true
+position = Vector2(256, 0)
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_c2u82")
+gravity_scale = 0.0
+lock_rotation = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProgressBar/PlayerReel"]
+shape = SubResource("RectangleShape2D_c2u82")
+
+[node name="FishSprite" type="Sprite2D" parent="ProgressBar/PlayerReel"]
+unique_name_in_owner = true
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_neky2")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ProgressBar"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProgressBar/StaticBody2D"]
+position = Vector2(-10, 0)
+shape = SubResource("RectangleShape2D_neky2")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="ProgressBar"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProgressBar/StaticBody2D2"]
+position = Vector2(522, 0)
+shape = SubResource("RectangleShape2D_neky2")
+
+[node name="TextureRect" type="ColorRect" parent="ProgressBar"]
+z_index = -5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="body_entered" from="ProgressBar/FishPoint" to="." method="_on_fish_point_body_entered"]
+[connection signal="body_exited" from="ProgressBar/FishPoint" to="." method="_on_fish_point_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
