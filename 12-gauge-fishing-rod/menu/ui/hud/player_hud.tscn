@@ -12,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
@@ -21,6 +22,7 @@ theme_override_constants/margin_bottom = 32
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+mouse_filter = 2
 vertical = true
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/BoxContainer"]
@@ -28,6 +30,7 @@ custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = ExtResource("1_8405h")
 expand_mode = 1
 stretch_mode = 4
@@ -35,3 +38,4 @@ stretch_mode = 4
 [node name="Label" type="Label" parent="MarginContainer/BoxContainer"]
 layout_mode = 2
 text = "I LOVE BIG WOMEN"
+horizontal_alignment = 1
