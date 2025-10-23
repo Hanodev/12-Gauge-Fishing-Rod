@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cam4bh1ds81ys"]
+[gd_scene load_steps=30 format=3 uid="uid://cam4bh1ds81ys"]
 
 [ext_resource type="Script" uid="uid://th58mqtf3yv3" path="res://main/player.gd" id="1_ou4ca"]
 [ext_resource type="Script" uid="uid://doxjjxmpshdng" path="res://main/weaponry/essential/equipment_handler.gd" id="2_4v151"]
@@ -6,13 +6,13 @@
 [ext_resource type="Script" uid="uid://bmxbe0suv76bg" path="res://main/camera.gd" id="3_5ar6u"]
 [ext_resource type="PackedScene" uid="uid://cvv5w7qvfkqsr" path="res://main/weaponry/gun/short_barrel.tscn" id="3_lat6o"]
 [ext_resource type="Script" uid="uid://7om8331fswfc" path="res://main/functionality/interaction/interactor.gd" id="4_bsjl6"]
-[ext_resource type="Shader" uid="uid://cfhm3rsqlbmlq" path="res://asset/shader/canvas/anime_lines.gdshader" id="5_pi8k8"]
 [ext_resource type="Script" uid="uid://dw0hnq7yosqa7" path="res://main/weaponry/essential/rod.gd" id="6_1vr6g"]
 [ext_resource type="Shader" uid="uid://b5fa5uqmflay7" path="res://asset/shader/spatial/fire3d.gdshader" id="7_bsjl6"]
 [ext_resource type="ArrayMesh" uid="uid://doun4bnrsfgcb" path="res://main/weaponry/gun/asset/Shotgun.obj" id="8_c6jii"]
 [ext_resource type="AudioStream" uid="uid://def4qpstng24b" path="res://main/weaponry/gun/asset/ShotgunShot1.wav" id="9_47fst"]
 [ext_resource type="AudioStream" uid="uid://bfvrlqo840cr2" path="res://main/weaponry/gun/asset/ShotgunShot2.wav" id="10_jsce1"]
 [ext_resource type="AudioStream" uid="uid://cxb56fi7nxuwv" path="res://main/weaponry/gun/asset/ShotgunShot3.wav" id="11_xhk5t"]
+[ext_resource type="PackedScene" uid="uid://w5bvehahm4fv" path="res://menu/ui/hud/player_hud.tscn" id="14_c6jii"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oul6g"]
 
@@ -243,23 +243,6 @@ stream_0/stream = ExtResource("9_47fst")
 stream_1/stream = ExtResource("10_jsce1")
 stream_2/stream = ExtResource("11_xhk5t")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_pi8k8"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5ar6u"]
-noise = SubResource("FastNoiseLite_pi8k8")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ar6u"]
-shader = ExtResource("5_pi8k8")
-shader_parameter/noise = SubResource("NoiseTexture2D_5ar6u")
-shader_parameter/line_count = 2.0
-shader_parameter/distortion_power = 0.034
-shader_parameter/line_falloff = 0.386000018335
-shader_parameter/mask_size = 0.175
-shader_parameter/mask_edge = 0.195
-shader_parameter/animation_speed = 20.0
-shader_parameter/blur_strength = 0.01
-shader_parameter/effect_power = 1.0
-
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("rod")]
 script = ExtResource("1_ou4ca")
 rod = NodePath("CameraPivot/CameraHolder/EquipmentHandler/TestRod")
@@ -345,16 +328,7 @@ bus = &"Effects"
 [node name="target" type="Node3D" parent="CameraPivot/CameraHolder/EquipmentHandler/TestRod"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1909585, -2.8715885)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-material = SubResource("ShaderMaterial_5ar6u")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="PlayerHud" parent="." instance=ExtResource("14_c6jii")]
 
 [connection signal="primary_activated" from="CameraPivot/CameraHolder/EquipmentHandler/TestRod" to="CameraPivot/CameraHolder/EquipmentHandler/TestRod/SFXFire" method="play"]
 [connection signal="primary_activated" from="CameraPivot/CameraHolder/EquipmentHandler/TestRod" to="CameraPivot/CameraHolder/EquipmentHandler/TestRod/AnimationPlayer" method="play" binds= [&"shoot"]]
