@@ -39,3 +39,10 @@ stretch_mode = 4
 layout_mode = 2
 text = "I LOVE BIG WOMEN"
 horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+custom_minimum_size = Vector2(4, 4)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0, 1, 0, 0.32156864)
