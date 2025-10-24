@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cthhhios41gl1" path="res://fishing/fish-png-19.png" id="2_stcsv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jiuee"]
-radius = 80.0
+radius = 28.442924
 
 [node name="FishingGame2" type="Node2D"]
 script = ExtResource("1_jiuee")
@@ -41,16 +41,3 @@ grow_vertical = 2
 [node name="RayCast2D2" type="RayCast2D" parent="."]
 position = Vector2(-89, 320)
 target_position = Vector2(250, 0)
-
-[node name="ColorRect" type="ColorRect" parent="RayCast2D2"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -2.0
-offset_right = 265.0
-offset_bottom = 2.0
-grow_horizontal = 2
-grow_vertical = 2

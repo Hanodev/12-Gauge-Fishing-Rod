@@ -16,6 +16,7 @@ func _input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	if ray_cast_2d_2.is_colliding():
 		fish.emit(area_2d.linear_velocity.length())
+		area_2d.freeze = true
 		return
 
 	if ray_cast_2d.is_colliding():
