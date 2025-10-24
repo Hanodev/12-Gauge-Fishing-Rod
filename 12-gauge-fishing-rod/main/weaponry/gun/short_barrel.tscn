@@ -233,8 +233,10 @@ stream_0/stream = ExtResource("4_l5cyb")
 stream_1/stream = ExtResource("5_o4ts1")
 stream_2/stream = ExtResource("6_lxgt3")
 
-[node name="ShortBarrel" type="Node3D"]
+[node name="ShortBarrel" type="Node3D" node_paths=PackedStringArray("target_ray")]
 script = ExtResource("1_2ob26")
+fire_delay = 0.3
+target_ray = NodePath("Shaker/MeshInstance3D/RayCast3D")
 metadata/_custom_type_script = "uid://chtdxnjbpm3m3"
 
 [node name="Shaker" type="Node3D" parent="."]
@@ -253,6 +255,10 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.41311347, -0.41280
 material_overlay = SubResource("ShaderMaterial_73nwk")
 mesh = ExtResource("2_8qhk2")
 skeleton = NodePath("../..")
+
+[node name="RayCast3D" type="RayCast3D" parent="Shaker/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38932145, -6.5920353)
+target_position = Vector3(0, 0, -300)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Shaker/MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.37502897, -6.612996)
