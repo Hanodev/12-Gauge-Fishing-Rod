@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://boubf1v4tk34o"]
 
-[ext_resource type="Script" uid="uid://tbnea161xmog" path="res://fishing/fishing_minigame.gd" id="1_c2u82"]
+[ext_resource type="Script" uid="uid://tbnea161xmog" path="res://fishing/minigame/fishing_minigame.gd" id="1_c2u82"]
 [ext_resource type="Texture2D" uid="uid://cthhhios41gl1" path="res://fishing/fish-png-19.png" id="2_neky2"]
 [ext_resource type="Texture2D" uid="uid://dejk2qsle0ltd" path="res://menu/ui/hud/fishing-pole.svg" id="3_mhktn"]
 

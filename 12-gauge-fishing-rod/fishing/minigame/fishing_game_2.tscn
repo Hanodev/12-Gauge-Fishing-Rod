@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpupbkuc4wekg"]
+
+[ext_resource type="Script" uid="uid://bj4tpba2s3utd" path="res://fishing/minigame/fishing_game_2.gd" id="1_jiuee"]
+[ext_resource type="Texture2D" uid="uid://cthhhios41gl1" path="res://fishing/fish-png-19.png" id="2_stcsv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jiuee"]
+radius = 80.0
+
+[node name="FishingGame2" type="Node2D"]
+script = ExtResource("1_jiuee")
+
+[node name="Area2D" type="RigidBody2D" parent="."]
+gravity_scale = 0.8
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+scale = Vector2(0.10386277, 0.093819)
+texture = ExtResource("2_stcsv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_jiuee")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-89, 287)
+target_position = Vector2(250, 0)
+
+[node name="ColorRect" type="ColorRect" parent="RayCast2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 265.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(-89, 320)
+target_position = Vector2(250, 0)
+
+[node name="ColorRect" type="ColorRect" parent="RayCast2D2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 265.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
