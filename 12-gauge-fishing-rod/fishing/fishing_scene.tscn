@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://cdowjt44rtflj"]
+
+[ext_resource type="PackedScene" uid="uid://cam4bh1ds81ys" path="res://main/player.tscn" id="1_hmnc2"]
+[ext_resource type="PackedScene" uid="uid://dw8j5krymgsip" path="res://fishing/fishing_rod.tscn" id="2_e1iy6"]
+[ext_resource type="Texture2D" uid="uid://cdpv4sefuxbx1" path="res://asset/sky.hdr" id="2_ftbp6"]
+[ext_resource type="Script" uid="uid://bpdktauw3fl08" path="res://fishing/fishing_area.gd" id="4_ipvc7"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_e1iy6"]
+panorama = ExtResource("2_ftbp6")
+energy_multiplier = 0.05
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("PanoramaSkyMaterial_e1iy6")
+
+[sub_resource type="Environment" id="Environment_ipvc7"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ftbp6"]
+size = Vector3(300, 5, 300)
+
+[node name="FishingScene" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_hmnc2")]
+
+[node name="FishingRod" parent="Player/camera_base/vfx_base/Camera3D" index="2" instance=ExtResource("2_e1iy6")]
+
+[node name="Main" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Main"]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Main"]
+environment = SubResource("Environment_ipvc7")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Main"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.0114975, 0)
+use_collision = true
+size = Vector3(25, 1, 25)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.561138, 0)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("4_ipvc7")
+metadata/_custom_type_script = "uid://bpdktauw3fl08"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_ftbp6")
+
+[editable path="Player"]

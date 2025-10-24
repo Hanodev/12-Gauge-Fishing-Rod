@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://bodorvbtoxett"]
+
+[ext_resource type="Script" uid="uid://c1qg5ilnuxo57" path="res://fishing/test_fish.gd" id="1_2nhkj"]
+[ext_resource type="Texture2D" uid="uid://cthhhios41gl1" path="res://fishing/fish-png-19.png" id="2_nuh6s"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nuh6s"]
+bounce = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nuh6s"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_kp4ss"]
+
+[node name="TestFish" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_nuh6s")
+gravity_scale = 2.0
+script = ExtResource("1_2nhkj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_nuh6s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("SphereMesh_kp4ss")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0015
+billboard = 2
+texture = ExtResource("2_nuh6s")

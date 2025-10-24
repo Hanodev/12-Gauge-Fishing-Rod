@@ -2,5 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cvlyi36h2bw0v" path="res://fishing/fishing_rod.gd" id="1_qej5g"]
 
-[node name="FishingRod" type="Node3D"]
+[node name="FishingRod" type="RayCast3D"]
+target_position = Vector3(0, 0, -250)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
 script = ExtResource("1_qej5g")

@@ -23,13 +23,14 @@ func _primary_shot(activated:=false) -> void:
 
 	cd = fire_delay;
 	primary_activated.emit()
-	
+
 	# todo: probably make the ray a component that can do spread and projectile count but whatever
 	#for i in projectile_count:
-	
+
 	var pos := Manager.get_player_raycast_position();
 	var collider := Manager.get_player_raycast_collider();
-
+	if not collider:
+		return
 	if collider.has_method(&"apply_damage"):
 		collider.call(&"apply_damage", 100);
 	return;
